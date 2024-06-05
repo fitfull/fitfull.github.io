@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Program</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #333;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: orange;
+        }
+        .btn, .exercise-list li button, .warmup-list li button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            color: #fff;
+            background-color: orange;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .btn:hover, .exercise-list li button:hover, .warmup-list li button:hover {
+            background-color: #ff9900;
+        }
+        .workout-day, .warmup-list, .exercise-list, .stretch-list, .nav-buttons {
+            display: none;
+        }
+        .exercise-list li, .warmup-list li, .stretch-list li {
+            background: #444;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .exercise-list li a, .warmup-list li a, .stretch-list li a {
+            text-decoration: none;
+            color: orange;
+        }
+        .exercise-list li a:hover, .warmup-list li a:hover, .stretch-list li a:hover {
+            text-decoration: underline;
+        }
+        .exercise-list li.finished, .warmup-list li.finished, .stretch-list li.finished {
+            background: #666;
+            text-decoration: line-through;
+        }
+        .nav-buttons {
+            text-align: center;
+        }
+        .nav-buttons button {
+            margin: 5px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            h1, h2, h3 {
+                font-size: 1.5em;
+            }
+            .btn, .exercise-list li button, .warmup-list li button {
+                font-size: 0.9em;
+            }
+            .exercise-list li, .warmup-list li {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Workout Program</h1>
+        
+        <div id="day-selection">
+            <button class="btn" onclick="showWarmup('monday')">Monday</button>
+            <button class="btn" onclick="showWarmup('wednesday')">Wednesday</button>
+            <button class="btn" onclick="showWarmup('friday')">Friday</button>
+        </div>
+
+        <div class="warmup-list" id="warmup-list">
+            <h2>Warm-Up</h2>
+            <ul>
+                <li><a href="arm_circles_video_url" target="_blank">Arm Circles</a> - 30 seconds each direction <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="trunk_rotations_video_url" target="_blank">Trunk Rotations</a> - 1 minute <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="leg_swings_video_url" target="_blank">Leg Swings</a> - 30 seconds per leg <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="lunges_rotation_video_url" target="_blank">Lunges with Rotation</a> - 1 minute <button onclick="markFinished(this)">Mark as Finished</button></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" onclick="goBack()">Back</button>
+                <button class="btn" onclick="showWorkout()">Finish Warm-Up</button>
+            </div>
+        </div>
+
+        <div class="workout-day" id="monday">
+            <h2>Monday</h2>
+            <ul class="exercise-list">
+                <li><a href="squats_video_url" target="_blank">Squats</a> - 3 sets of 12 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="bench_press_video_url" target="_blank">Bench Press</a> - 3 sets of 10 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="row_video_url" target="_blank">Dumbbell Row</a> - 3 sets of 10 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="tricep_extensions_video_url" target="_blank">Tricep Extensions</a> - 3 sets of 12 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="crunches_video_url" target="_blank">Crunches</a> - 3 sets of 15 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" onclick="goBack()">Back</button>
+                <button class="btn" onclick="showStretches()">Next</button>
+            </div>
+        </div>
+
+        <div class="workout-day" id="wednesday">
+            <h2>Wednesday</h2>
+            <ul class="exercise-list">
+                <li><a href="lunges_video_url" target="_blank">Alternating Lunges</a> - 3 sets of 12 reps per leg <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="military_press_video_url" target="_blank">Military Press</a> - 3 sets of 10 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="seated_row_video_url" target="_blank">Seated Row</a> - 3 sets of 10 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="bicep_curls_video_url" target="_blank">Bicep Curls</a> - 3 sets of 12 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="plank_video_url" target="_blank">Plank</a> - 3 sets of 30 seconds <button onclick="markFinished(this)">Mark as Finished</button></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" onclick="goBack()">Back</button>
+                <button class="btn" onclick="showStretches()">Next</button>
+            </div>
+        </div>
+
+        <div class="workout-day" id="friday">
+            <h2>Friday</h2>
+            <ul class="exercise-list">
+                <li><a href="leg_press_video_url" target="_blank">Leg Press</a> - 3 sets of 12 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="lateral_raises_video_url" target="_blank">Lateral Raises</a> - 3 sets of 12 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="lat_pulldown_video_url" target="_blank">Lat Pulldown</a> - 3 sets of 10 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="calf_raises_video_url" target="_blank">Calf Raises</a> - 3 sets of 15 reps <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="russian_twists_video_url" target="_blank">Russian Twists</a> - 3 sets of 15 reps per side <button onclick="markFinished(this)">Mark as Finished</button></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" onclick="goBack()">Back</button>
+                <button class="btn" onclick="showStretches()">Next</button>
+            </div>
+        </div>
+
+        <div class="stretch-list" id="stretch-list">
+            <h2>Stretches</h2>
+            <ul>
+                <li><a href="quadriceps_stretch_video_url" target="_blank">Quadriceps Stretch</a> - 30 seconds per leg <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="hamstring_stretch_video_url" target="_blank">Hamstring Stretch</a> - 30 seconds per leg <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="pectoral_stretch_video_url" target="_blank">Pectoral Stretch</a> - 30 seconds per arm <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="back_stretch_video_url" target="_blank">Back Stretch</a> - 30 seconds <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="calf_stretch_video_url" target="_blank">Calf Stretch</a> - 30 seconds per leg <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="shoulder_stretch_video_url" target="_blank">Shoulder Stretch</a> - 30 seconds per arm <button onclick="markFinished(this)">Mark as Finished</button></li>
+                <li><a href="oblique_stretch_video_url" target="_blank">Oblique Stretch</a> - 30 seconds per side <button onclick="markFinished(this)">Mark as Finished</button></li>
+            </ul>
+            <h3>Workout Complete!</h3>
+            <div class="nav-buttons">
+                <button class="btn" onclick="goBack()">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 'day-selection';
+
+        function showWarmup(day) {
+            document.getElementById(currentSection).style.display = 'none';
+            document.getElementById('warmup-list').style.display = 'block';
+            currentSection = 'warmup-list';
+            localStorage.setItem('currentDay', day);
+        }
+
+        function showWorkout() {
+            const day = localStorage.getItem('currentDay');
+            document.getElementById(currentSection).style.display = 'none';
+            document.getElementById(day).style.display = 'block';
+            currentSection = day;
+        }
+
+        function showStretches() {
+            document.getElementById(currentSection).style.display = 'none';
+            document.getElementById('stretch-list').style.display = 'block';
+            currentSection = 'stretch-list';
+        }
+
+        function markFinished(button) {
+            const li = button.parentElement;
+            li.classList.add('finished');
+            button.style.display = 'none';
+        }
+
+        function goBack() {
+            if (currentSection === 'warmup-list') {
+                document.getElementById(currentSection).style.display = 'none';
+                document.getElementById('day-selection').style.display = 'block';
+                currentSection = 'day-selection';
+            } else if (currentSection === 'stretch-list') {
+                const day = localStorage.getItem('currentDay');
+                document.getElementById(currentSection).style.display = 'none';
+                document.getElementById(day).style.display = 'block';
+                currentSection = day;
+            } else {
+                document.getElementById(currentSection).style.display = 'none';
+                document.getElementById('warmup-list').style.display = 'block';
+                currentSection = 'warmup-list';
+            }
+        }
+    </script>
+</body>
+</html>
